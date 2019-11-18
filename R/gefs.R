@@ -86,6 +86,27 @@ gefs <- function(var, lat, lon, ...) {
 }
 
 #' @rdname gefs
+gefs_compose_url <- function(var, lat, lon, ens, time,
+                             date = format(Sys.time(), "%Y%m%d"),
+                             forecast_time = c("0000", "0600", "1200", "1800"),
+                             dims = NULL) {
+
+  #forecast time
+  forecast_time <- match.arg(forecast_time)
+
+  https://thredds-jumbo.unidata.ucar.edu/thredds/dodsC/grib/NCEP/GEFS/Global_1p0deg_Ensemble/derived/GEFS_Global_1p0deg_Ensemble_derived_20191018_0000.grib2
+  #url parts
+  gefs_url_pre <- "http://thredds.ucar.edu/thredds/dodsC/grib/NCEP/GEFS/Global_1p0deg_Ensemble/members/GEFS_Global_1p0deg_Ensemble_"
+  gefs_url_suf <- ".grib2"
+
+  #final url
+  gefs_url <- paste0(gefs_url_pre, date, "_", forecast_time, gefs_url_suf)
+
+  gefs_url
+}
+
+
+#' @rdname gefs
 gefs_CONNECT <- function(date = format(Sys.time(), "%Y%m%d"),
                          forecast_time = c("0000", "0600", "1200", "1800")) {
 
@@ -97,7 +118,7 @@ gefs_CONNECT <- function(date = format(Sys.time(), "%Y%m%d"),
   forecast_time <- match.arg(forecast_time)
 
   #url parts
-  gefs_url_pre <- 'http://thredds.ucar.edu/thredds/dodsC/grib/NCEP/GEFS/Global_1p0deg_Ensemble/members/GEFS_Global_1p0deg_Ensemble_'
+  gefs_url_pre <- "http://thredds.ucar.edu/thredds/dodsC/grib/NCEP/GEFS/Global_1p0deg_Ensemble/members/GEFS_Global_1p0deg_Ensemble_"
   gefs_url_suf <- ".grib2"
 
   #final url

@@ -2,7 +2,7 @@ context("gefs")
 
 # Get the temporary directory
 temp_dir <- dirname(tempdir())
-nc_temp_files <- list.files(temp_dir, pattern = "^occookie")
+nc_temp_files <- list.files(temp_dir, pattern = "^occookie|^oc.*")
 
 
 #set a location
